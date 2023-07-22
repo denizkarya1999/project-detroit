@@ -1,0 +1,59 @@
+﻿@page "/Notifications/individualNotifications/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject NotificationService _NotificationService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: Individual Notifications</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1>Your Notifications</h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <div style="width:600px">
+            <MudFab Color="Color.Error" Icon="@Icons.Material.Filled.Send" OnClick="SendNotifications" />
+        </div>
+    </MudCard>
+    @if (NotificationObj == null)
+    {
+        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+    }
+    else
+    {
+        <MudTable Items="@NotificationObj" Hover="true" SortLabel="Sort By" Dense="true" Class="pa-4 mt-3">
+            <RowTemplate>
+                <MudTd DataLabel="Notification Name">@context.NotificationName</MudTd>
+                <MudTd DataLabel="Details">@context.Details</MudTd>
+                <MudStack Class="py-16 d-flex flex-1" Row="true">
+                    <MudIconButton Icon="@Icons.Filled.Close" Color="Color.Error" OnClick="(() => DeleteNotification(context.Id))" />
+                </MudStack>
+            </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+    List<Notification> NotificationObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await _userAccountService.getUserByIdAsync(Id);
+        NotificationObj = await _NotificationService.GetNotificationsByUserId(Id);
+    }
+
+    //Trigger action when clicking add button
+    void SendNotifications()
+    {
+        _navigationManager.NavigateTo($"/Notifications/SendNotification/Individual/{Id}");
+    }
+
+    private async Task DeleteNotification(Guid notificationId)
+    {
+        await _NotificationService.DeleteNotification(notificationId);
+        NotificationObj = await _NotificationService.GetNotificationsByUserId(Id);
+        StateHasChanged(); // Trigger a re-render to update the UI after deletion
+    }
+}

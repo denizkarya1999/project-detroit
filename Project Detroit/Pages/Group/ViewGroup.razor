@@ -1,0 +1,47 @@
+﻿@page "/Groups/ViewGroup/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: View Group</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>@currentGroup.GroupName</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText><MudIcon Icon="@Icons.Material.Filled.Group" Size="Size.Small" /> Has @currentGroup.Members.Count member(s)</MudText>
+        <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has balance of $@currentGroup.groupBalance</MudText>
+        <MudText><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Size="Size.Small" /> Has expense of $@currentGroup.groupExpense</MudText>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="MemberManager" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.PersonAdd" Color="Color.Dark">MANAGE MEMBERS</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdateGroup" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Warning">EDIT GROUP</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="DeleteGroup" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE GROUP</MudButton>
+    </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    Group? currentGroup = new Group();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentGroup = await Task.Run(() => _groupService.getGroupByIdAsync(Id));
+    }
+
+    //Update group after pressing update button
+    protected async void UpdateGroup()
+    {
+        _navigationManager.NavigateTo("/Groups/EditGroup/" + currentGroup.Id);
+    }
+
+    //Redirect to member manager
+    protected async void MemberManager()
+    {
+        _navigationManager.NavigateTo("/Members/MemberManager");
+    }
+
+    //Redirect to delete group
+    protected async void DeleteGroup()
+    {
+        _navigationManager.NavigateTo("/Groups/DeleteGroup/" + currentGroup.Id);
+    }
+}

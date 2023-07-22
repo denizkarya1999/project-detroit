@@ -1,0 +1,69 @@
+﻿@page "/Members/RemoveMember/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject GroupService groupService
+@inject NavigationManager navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Remove Member</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Remove @currentUser.Name</strong></h1></MudText>
+    <MudText Class="mb-2">Which group do you want @currentUser.Name to be removed?</MudText>
+    <MudCard Elevation="2" Class="mt-4 mb-4 pa-4">
+        <select class="form-control" @bind="selectedGroupId">
+            @if (groups == null)
+            {
+                <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+            }
+            else
+            {
+                <option value="">-- Select Group --</option>
+                @foreach (var group in groups)
+                {
+                    <option value="@group.Id">@group.GroupName</option>
+                }
+            }
+        </select>
+    </MudCard>
+    <MudButton Color="Color.Dark" StartIcon="@Icons.Material.Filled.PersonRemove"  Variant="Variant.Filled" @onclick="RemoveMemberFromGroup">REMOVE MEMBER FROM GROUP</MudButton>
+</MudPaper>
+
+@code {
+    //Section for user-related variables
+    [Parameter] public Guid Id { get; set; }
+    userAccount? currentUser = new userAccount();
+
+    //Section for group-related variables
+    List<Group> groups;
+    Guid? selectedGroupId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(Id));
+        groups = await groupService.getAllGroupsAsync();
+    }
+
+    private async Task RemoveMemberFromGroup()
+    {
+        if (currentUser.Id != null && selectedGroupId != null)
+        {
+            // Retrieve the user and group objects
+            var user = await _userAccountService.getUserByIdAsync(currentUser.Id);
+            var group = await groupService.getGroupByIdAsync(selectedGroupId.Value);
+
+            if (user != null && group != null)
+            {
+                // Remove member from the group
+                group.Members.Remove(user);
+                await groupService.UpdateGroupAsync(group);
+
+                navigationManager.NavigateTo("/Members/MemberManager"); // Navigate to the groups page after adding the user to the group
+            }
+        } else
+        {
+            Snackbar.Add($"Please select a group to proceed.", Severity.Error);
+        }
+    }
+}

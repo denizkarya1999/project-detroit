@@ -1,0 +1,44 @@
+﻿@page "/Groups/EditGroup/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Edit Group</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Edit Group</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@currentGroup.GroupName" Clearable="true" Label="Group Name" Margin="Margin.Dense" />
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@currentGroup.groupBalance" Format="N2" Label="Group Balance" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@currentGroup.groupExpense" Format="N2" Label="Group Expense" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdateGroup" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Success">SAVE CHANGES</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    Group? currentGroup = new Group();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentGroup = await Task.Run(() => _groupService.getGroupByIdAsync(Id));
+    }
+
+    //Update group after pressing update button
+    protected async void UpdateGroup()
+    {
+        await _groupService.UpdateGroupAsync(currentGroup);
+        _navigationManager.NavigateTo("/Groups/ViewGroup/" + currentGroup.Id);
+        Snackbar.Add("Operation successfully completed", Severity.Success);
+    }
+
+    //Trigger action when clicking cancel button
+    void Cancel()
+    {
+        _navigationManager.NavigateTo("/Groups/ViewGroup/" + currentGroup.Id);
+    }
+}

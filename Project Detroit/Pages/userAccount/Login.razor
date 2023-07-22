@@ -1,0 +1,91 @@
+﻿@page "/"
+@using Project.Detroit.Services
+@inject NavigationManager _navigationManager
+@layout LoginLayout
+@inject UserAccountService _userAccountService
+@inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Login</PageTitle>
+
+<div class="login-container">
+    <h1>Project Detroit</h1>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" @bind="@Email" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your password" @bind="@Password" required>
+    </div>
+    <button class="btn btn-primary" @onclick="CreateAccount">Create Account</button>
+    <button class="btn btn-primary" @onclick="HandleLogin">Sign in</button>
+</div>
+
+<style>
+    .login-container {
+        margin-top: 200px;
+        margin-bottom: 200px;
+        max-height: 240px;
+        max-width: 600px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-family: 'Segoe UI', sans-serif;
+    }
+    h1{
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    input {
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+    input{
+        border-radius: 5px;
+    }
+    .btn-primary {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 30px;
+        background-color: #000000;
+        color: #ffffff;
+        border-radius: 5px;
+        justify-content: center;
+    }
+</style>
+
+@code {
+    private string Email { get; set; }
+    private string Password { get; set; }
+
+    private async void HandleLogin()
+    {
+        // Retrieve the user with the entered email
+        var user = await _userAccountService.getUserByEmailAsync(Email);
+
+        if (user != null && user.Password == Password)
+        {
+            // Redirect to the homepage upon successful login
+            Snackbar.Add("Login was successful!", Severity.Success);
+            _navigationManager.NavigateTo($"/welcome?userId={user.Id}");
+        }
+        else
+        {
+            // Display an alert message
+            await JSRuntime.InvokeVoidAsync("alert", "Either username or password is wrong. Please try again.");
+        }
+    }
+
+    private async void CreateAccount()
+    {
+        _navigationManager.NavigateTo($"/UserAccount/CreateAccount");
+    }
+}

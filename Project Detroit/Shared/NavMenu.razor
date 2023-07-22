@@ -1,0 +1,92 @@
+﻿@inject NavigationManager _navigationManager
+
+<MudNavMenu Color="Color.Error">
+    <MudNavLink @onclick="Home" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavGroup Title="Expenses" Icon="@Icons.Material.Filled.Money" Expanded="false">
+        <MudNavLink @onclick="IndividualExpenses" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">Individual Expenses</MudNavLink>
+        <MudNavLink @onclick="GroupExpenses" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Group Expenses</MudNavLink>
+        </MudNavGroup>
+    <MudNavGroup Title="Payments" Icon="@Icons.Material.Filled.Payments" Expanded="false">
+        <MudNavLink @onclick="IndividualPayments" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">Individual Payments</MudNavLink>
+        <MudNavLink @onclick="GroupPayments" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Group Payments</MudNavLink>
+        </MudNavGroup>
+    <MudNavGroup Title="Reports" Icon="@Icons.Material.Filled.InsertDriveFile" Expanded="false">
+        <MudNavLink @onclick="IndividualReports" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">Individual Reports</MudNavLink>
+        <MudNavLink @onclick="GroupReports" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Group Reports</MudNavLink>
+    </MudNavGroup>
+    <MudNavGroup Title="Notifications" Icon="@Icons.Material.Filled.Notifications" Expanded="false">
+        <MudNavLink @onclick="IndividualNotifications" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">Individual Notifications</MudNavLink>
+        <MudNavLink @onclick="GroupNotifications" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Group Notifications</MudNavLink>
+    </MudNavGroup>
+    <MudNavLink @onclick="Groups" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Groups">Groups</MudNavLink>
+    <MudNavLink @onclick="Members" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">Members</MudNavLink>
+</MudNavMenu>
+
+@code {
+    private Guid UserId { get; set; }
+
+    protected override void OnInitialized()
+    {
+        var uri = new Uri(_navigationManager.Uri);
+        var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        var userIdString = queryParams["userId"];
+        if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out var userId))
+        {
+            UserId = userId;
+        }
+    }
+
+    private void Home()
+    {
+        _navigationManager.NavigateTo($"/welcome?userId={UserId}");
+    }
+
+    private void Groups()
+    {
+        _navigationManager.NavigateTo($"/Group/ManageGroups");
+    }
+
+    private void Members()
+    {
+        _navigationManager.NavigateTo($"/Members/MemberManager");
+    }
+
+    private void IndividualExpenses()
+    {
+        _navigationManager.NavigateTo($"/Expenses/individualExpenses/{UserId}");
+    }
+
+    private void GroupExpenses()
+    {
+        _navigationManager.NavigateTo($"/Expenses/groupExpenses/selectGroup");
+    }
+
+    private void GroupPayments()
+    {
+        _navigationManager.NavigateTo($"/Payments/groupPayments/selectGroup");
+    }
+
+    private void IndividualPayments()
+    {
+        _navigationManager.NavigateTo($"/Payments/individualPayments/{UserId}");
+    }
+
+    private void IndividualNotifications()
+    {
+        _navigationManager.NavigateTo($"/Notifications/individualNotifications/{UserId}");
+    }
+
+    private void GroupNotifications()
+    {
+        _navigationManager.NavigateTo($"/Notifications/GroupNotifications/selectGroup");
+    }
+
+    private void IndividualReports()
+    {
+        _navigationManager.NavigateTo($"/Reports/individualReports/{UserId}");
+    }
+    private void GroupReports()
+    {
+        _navigationManager.NavigateTo($"/Reports/groupReports/selectGroup");
+    }
+}

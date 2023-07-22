@@ -1,0 +1,53 @@
+﻿@page "/Reports/DeleteReport/Individual/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject ReportService _reportService
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Delete Report</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Delete Report</strong></h1></MudText>
+    <MudText Class="mb-2">Are you sure you want to delete this report?</MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText Class="mb-2"><h1><strong>@_report.ReportName</strong></h1></MudText>
+        <MudCard Elevation="2" Class="mt-4 pa-4">
+            <MudText>@_report.Details</MudText>
+        </MudCard>
+        <MudButton Class="mt-4 mr-4" OnClick="RemoveReport" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE</MudButton>
+        <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+    </MudCard>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+
+    Report _report = new Report();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _report = await Task.Run(() => _reportService.GetReportById(Id));
+        if (_report != null && _report.UserAccountID.HasValue)
+        {
+            currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(_report.UserAccountID.Value));
+        }
+    }
+
+    //Delete Report
+    protected async void RemoveReport()
+    {
+        await _reportService.DeleteReport(_report.Id);
+        _navigationManager.NavigateTo($"/Reports/individualReports/{currentUser.Id}");
+        Snackbar.Add("Operation successfully completed", Severity.Success);
+    }
+
+    //Cancel operation
+    void Cancel()
+    {
+        _navigationManager.NavigateTo($"/Reports/individualReports/{currentUser.Id}");
+    }
+}

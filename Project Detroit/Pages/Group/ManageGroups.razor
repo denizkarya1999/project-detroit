@@ -1,0 +1,57 @@
+﻿@page "/Group/ManageGroups"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: Manage Groups</PageTitle>
+
+<MudPaper Class="pa-8 ma-5" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>All Groups</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+         <div style="width:600px">
+        <MudFab Color="Color.Error" Icon="@Icons.Material.Filled.Add" OnClick="AddGroup"/>
+    </div>
+    </MudCard>
+    @if (GroupObj == null)
+        {
+        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+    }
+    else
+    {
+        <MudTable Items="@GroupObj" Hover="true" SortLabel="Sort By" Dense="true" Class="pa-4 mt-3">
+            <HeaderContent>
+            <MudTh>Group Name</MudTh>
+            <MudTh>Group Balance</MudTh>
+            <MudTh>Group Expense</MudTh>
+            <MudTh>Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+                <MudTd DataLabel="Group Name">@context.GroupName</MudTd>
+                <MudTd DataLabel="Group Balance">$@context.groupBalance</MudTd>
+                <MudTd DataLabel="Group Expense">$@context.groupExpense</MudTd>
+                <MudStack Class="py-16 d-flex flex-1" Row="true">
+                    <MudIconButton Href="@($"/Members/MemberManager")" Icon="@Icons.Filled.Person" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Groups/ViewGroup/{context.Id}")" Icon="@Icons.Filled.Preview" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Groups/EditGroup/{context.Id}")" Icon="@Icons.Filled.Edit" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Groups/DeleteGroup/{context.Id}")" Icon="@Icons.Filled.Delete" Color="Color.Error" />
+                </MudStack>
+        </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+@code {
+    List<Group> GroupObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        GroupObj = await Task.Run(() => _groupService.getAllGroupsAsync());
+    }
+
+    //Trigger action when clicking add button
+    void AddGroup()
+    {
+        _navigationManager.NavigateTo("/Groups/CreateGroup/");
+    }
+}

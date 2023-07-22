@@ -1,0 +1,43 @@
+﻿@page "/Payments/ViewPayment/Group/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject PaymentService _paymentService
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: View Payment</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>@_payment.PaymentName</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has an amount of $@_payment.PaymentAmount</MudText>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdatePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Warning">EDIT PAYMENT</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="DeletePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE PAYMENT</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    Payment? _payment = new Payment();
+    Group? _group = new Group();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _payment = await _paymentService.GetPaymentById(Id);
+        _group = await _groupService.getGroupByIdAsync(_payment.GroupID.Value);
+    }
+
+    // Update payment after pressing the update button
+    protected void UpdatePayment()
+    {
+        _navigationManager.NavigateTo("/Payments/EditPayment/Group/" + _payment.Id);
+    }
+
+    // Redirect to delete group payment
+    protected void DeletePayment()
+    {
+        _navigationManager.NavigateTo("/Payments/DeletePayment/Group/" + _payment.Id);
+    }
+}

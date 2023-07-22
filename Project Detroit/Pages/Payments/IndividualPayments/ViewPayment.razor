@@ -1,0 +1,44 @@
+﻿@page "/Payments/ViewPayment/Individual/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject PaymentService _PaymentService
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: View Payment</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>@_payment.PaymentName</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has an amount of $@_payment.PaymentAmount</MudText>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdatePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Warning">EDIT PAYMENT</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="DeletePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE PAYMENT</MudButton>
+ </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+
+    Payment _payment = new Payment();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _payment = await Task.Run(() => _PaymentService.GetPaymentById(Id));
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(_payment.UserAccountID.Value));
+    }
+
+    //Update payment after pressing update button
+    protected async void UpdatePayment()
+    {
+        _navigationManager.NavigateTo("/Payments/EditPayment/Individual/" + _payment.Id);
+    }
+
+    //Redirect to delete payment
+    protected async void DeletePayment()
+    {
+        _navigationManager.NavigateTo("/Payments/DeletePayment/Individual/" + _payment.Id);
+    }
+}

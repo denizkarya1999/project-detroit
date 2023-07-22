@@ -1,0 +1,41 @@
+﻿@page "/Groups/CreateGroup/"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Create Group</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Add Group</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@_group.GroupName" Clearable="true" Label="Group Name" Margin="Margin.Dense"/>
+        <MudTextField @bind-Value="@_group.groupBalance" Clearable="true" Label="Group Balance ($)" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@_group.groupExpense" Clearable="true" Label="Group Expense ($)" Margin="Margin.Dense" />
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="AddGroup" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Success">ADD GROUP</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+    </MudPaper>
+
+@code {
+    //Create a new group
+    Group _group = new Group()
+    {
+        Id = Guid.NewGuid()
+    };
+
+    //Create group
+    protected async void AddGroup()
+    {
+        await _groupService.createGroupAsync(_group);
+        _navigationManager.NavigateTo("/Group/ManageGroups");
+        Snackbar.Add("Operation successfully completed", Severity.Success);
+    }
+
+    //Cancel operation
+    void Cancel()
+    {
+        _navigationManager.NavigateTo("/Group/ManageGroups");
+    }
+}

@@ -1,0 +1,47 @@
+﻿@page "/Payments/EditPayment/Individual/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject PaymentService _PaymentService
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Edit Payment</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Edit Payment</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@_payment.PaymentName" Clearable="true" Label="Payment Name" Margin="Margin.Dense" />
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@_payment.PaymentAmount" Format="N2" Label="Payment Amount" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdatePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Success">SAVE CHANGES</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+
+    Payment _payment = new Payment();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _payment = await Task.Run(() => _PaymentService.GetPaymentById(Id));
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(_payment.UserAccountID.Value));
+    }
+
+    //Update payment after pressing update button
+    protected async void UpdatePayment()
+    {
+        await _PaymentService.UpdatePayment(_payment);
+        _navigationManager.NavigateTo($"/Payments/individualPayments/{currentUser.Id}");
+        Snackbar.Add("Operation successfully completed", Severity.Success);
+    }
+
+    //Cancel operation
+    void Cancel()
+    {
+        _navigationManager.NavigateTo($"/Payments/individualPayments/{currentUser.Id}");
+    }
+}

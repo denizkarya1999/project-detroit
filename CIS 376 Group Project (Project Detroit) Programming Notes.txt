@@ -1,0 +1,261 @@
+CIS 376 Group Project Programming Notes : Project Detroit
+######################################################################
+ Section-1: Server Instances
+  SQL Server Table Instances: 
+    Servers:
+     projectDetroitServer
+      userAccount (seperateTable)
+       * UserID (key), (guid)
+       * Name (string)
+       * Surname (string)
+       * Email (string)
+       * Password (string)
+       * individualBalance? (currency)
+       * individualExpense? (currency)
+       * individualPayments? (paymentCollection)
+       * userApprovedExpenses? (expenseCollection)
+       * userNotifications? (notificationCollection)
+       * userReports? (reportCollection)
+      group (seperateTable)
+       * GroupID (key), (guid)
+       * GroupName (string)
+       * Members (groupCollection)
+       * groupBalance? (currency)
+       * groupExpense? (currency)
+       * groupPayments? (paymentCollection)
+       * groupApprovedExpenses? (expenseCollection)
+       * groupNotifications? (notificationCollection)
+       * groupReports? (reportCollection)
+      shared (combinedTable -> groupTable & userAccountTable)
+       * sharedBalance? (currency)
+       * sharedExpenses? (expenseCollection)
+       * sharedPayments? (paymentCollection)
+       * sharedNotifications? (notificationCollection)
+       * sharedReports? (reportCollection)
+      expense (groupTable, userAccountTable and shared)
+       * Id (Guid)
+       * ExpenseName (String)
+       * ExpenseAmount (decimal)
+       * UserAccountID (Guid)
+       * userAccount (userAccount)
+       * GroupID (Guid)
+       * Group (Group)
+       * SharedItems <sharedItemCollection)
+      Payment (groupTable, userAccountTable and shared)
+       * PaymentName (string)
+       * PaymentAmount (decimal)
+       * UserAccountID (Guid)
+       * UserAccount (userAccount)
+       * GroupID (Guid)
+       * Group (Group)
+       * SharedItems (ICollection<shared>)
+      Report (groupTable and userAccountTable)
+       * ReportName (string)
+       * Details (string)
+       * UserAccountID (Guid)
+       * UserAccount (userAccount)
+       * GroupID (Guid)
+       * Group (Group)
+       * SharedItems (ICollection<shared>)
+       * SharedBalance (decimal)
+       * SharedExpenses (ICollection<Expense>)
+       * SharedPayments (ICollection<Payment>)
+       * SharedNotifications (ICollection<Notification>)
+       * SharedReports (ICollection<Report>)
+      Notification (groupTable and userAccountTable)
+       * Id (Guid)
+       * NotificationName (string)
+       * Details (string)
+       * UserAccountID (Guid)
+       * UserAccount (userAccount)
+       * GroupID (Guid)
+       * Group (Group)
+       * SharedItems (ICollection<shared>)
+
+ Section-2: Services
+  * group 
+    * getAllGroupsAsync()
+    * getGroupByIdAsync(Guid id)
+    * getGroupByNameAsync(string name)
+    * getGroupByMembersAsync(string memberName)
+    * createGroupAsync(Group _group)
+    * addNewMemberToGroupAsync(string groupName, userAccount _member)
+    * removeMemberFromGroupAsync(string groupName, userAccount _member)
+    * updateGroupAsync(Group _group)
+    * leaveGroupAsync(Guid memberId)
+    * deleteGroupAsync(Group _group)
+  * userAccount
+    * getAllUsersAsync()
+    * getUserByIdAsync(Guid id)
+    * getUserByNameAsync(string name)
+    * getUserByEmail(string email)
+    * getUserByPassword(string password)
+    * addUserAsync(userAccount _user)
+    * updateUserAsync(userAccount _user)
+    * deleteUserAsync(userAccount _user)
+  * shared
+    * getSharedByUserIdAsync(userAccount _user)
+    * addSharedAsync(userAccount _user, Group _group)
+    * updateSharedAsync(userAccount _user, Group _group)
+    * deleteSharedAsync(shared _shared)
+  * Expense
+    * GetExpenseById(Guid expenseId)
+    * GetExpensesByUserId(Guid userId)
+    * GetExpensesByGroupId(Guid groupId)
+    * CreateExpense(Expense expense)
+    * UpdateExpense(Expense expense)
+    * DeleteExpense(Guid expenseId)
+  * Payment
+    * GetPaymentsBasedOnUserId(Guid userId)
+    * GetPaymentsBasedOnGroupId(Guid groupId)
+    * GetPaymentById(Guid paymentId)
+    * CreatePayment(Payment payment)
+    * UpdatePayment(Payment payment)
+    * DeletePayment(Guid paymentId)
+  * Report
+    * GetReportById(Guid reportId)
+    * GetReportsByUserId(Guid userId)
+    * GetReportsByGroupId(Guid groupId)
+    * CreateReport(Report report)
+    * UpdateReport(Report report)
+    * DeleteReport(Guid reportId)
+  * Notification 
+    * GetNotificationById(Guid notificationId)
+    * GetNotificationsByUserId(Guid userId)
+    * GetNotificationsByGroupId(Guid groupId)
+    * CreateNotification(Notification notification)
+    * UpdateNotification(Notification notification)
+    * DeleteNotification(Guid notificationId)
+
+ Section-3: Pages:
+  * Login Page - Completed
+    * Sign-up - Completed
+  * Index: Welcome Page - Completed
+  * User Page (As name and surname) - Completed
+    * View Profile - Completed
+      * Edit Profile - Completed
+      * Close Account - Completed
+    * Sign Out - Completed
+  * Manage Expenses (As a link group) - Completed
+    * View Individual Expenses - Completed
+       * Add Expense - Completed
+       * View Expense - Completed
+       * Delete Expense - Completed
+    * View Group Expenses - Completed
+       * Add Expense - Completed
+       * View Expense - Completed
+       * Delete Expense - Completed
+  * Manage Payments (As a link group) - Completed
+    * View Individual Payments - Completed
+        * Add Payment - Completed
+        * View Payment - Completed
+        * Edit Payment - Completed
+        * Delete Payment - Completed
+    * View Group Payments - Completed      
+        * Add Payment - Completed
+        * View Payment - Completed
+        * Edit Payment - Completed
+        * Delete Payment - Completed
+  * Manage Groups - Completed
+    * Manage Members - Completed
+      * Add Member - Completed
+      * Remove Member - Completed
+    * View Group - Completed
+      * Manage Members - Completed
+      * Edit Group - Completed
+      * Delete Group - Completed
+    * Create Group - Completed
+    * Edit Group - Completed
+    * Delete Group - Completed
+  * Manage Notifications
+    * Individual Notifications - Completed
+      * Send Notification to A Group - Completed
+      * Delete Notification - Completed
+    * View Group Notifications - Completed
+      * Send Notification to an Individual - Completed
+      * Delete Notification - Completed
+  * Manage Reports
+    * View Individual Reports - Completed
+       * Send Report to a group - Completed
+       * View Report - Completed - Completed
+       * Delete Report - Completed - Completed
+    * View Group Reports - Completed
+       * Send Report to a group - Completed
+       * View Report - Completed
+       * Delete Report - Completed
+  * About - Completed
+
+ Section-4: Technologies:
+  Front-End Templates: 
+   * Blazor Web Assembly with MudBlazor Templates
+  Front-End Technologies:
+   * HTML
+   * CSS
+   * JavaScript
+   * MudBlazor Components
+  Backend Technologies:
+   * C#
+   * Microsoft SQL Server
+   * Entity Framework Core
+   * Nuget Packages
+   * Dependency injections
+  
+ Section-5: Programming Resources:
+   * Setting up MudBlazor (Front-End): https://mudblazor.com/getting-started/installation#using-our-dotnet-templates
+   * MudBlazor Templates (Front-End): https://mudblazor.com/components/appbar#api
+   * .NET CRUD with EF Core (Back-End): https://www.c-sharpcorner.com/article/blazor-crud-app-using-entity-framework-core-in-net-5/
+   * Previous Project: Avalon https://github.com/denizkarya1999/Avalon.Academia/blob/main/Project.Avalon/Program.cs
+   * ChatGPT (AI): https://chat.openai.com/chat
+   * Stack Overflow: https://stackoverflow.com/
+
+ Section-6: System Requirements:
+   * Microsoft Windows 10 or Above
+   * Microsoft Visual Studio 2022
+   * Microsoft SQL Server 2019 (SQL Express and SSMS)
+   * Microsoft .NET 7 SDK or Later
+   * ASP.NET Core Development Kit (available as a Visual Studio Package)
+   * Hardware must be able to handle Visual Studio .NET programming
+   * Computer must be connected to internet
+
+ Section-7: Project Setup:
+   1- Obtain the project source code either by cloning the repository from a version control system (e.g.,     
+      GitHub) or by downloading the project as a ZIP file from the repository.
+      * Once the project is downloaded, move the project on a secure location (such as C:\Users\{your-username}\source) 
+   2- Open the project folder in the chosen code editor. The editor should recognize it as a .NET project and set up the necessary 
+      configurations.
+      * Make sure you downloaded every program listed in "System Requirements".
+      * Start Microsoft Visual Studio 2022.
+      * Click "Open a project or solution" button.
+      * Locate to the project`s location
+      * Select "Project.Detroit.sln" from the location and open the project.
+   3- In the terminal or command prompt, navigate to the project directory and run the command 'dotnet restore'. This will download and  
+      restore all the project dependencies specified in the csproj file.
+      * Open Windows Terminal (or Windows Powershell if not available)
+      * Type command "cd {your-project-location}" and enter.
+      * To make sure whether the project exists in that location type "ls" to see whether "Project.Detroit.sln" exist or not.
+      * Once you located to the project location, now run 'dotnet restore' command to restore project dependencies.
+   4- If the project uses a database (e.g., SQL Server, SQLite), ensure that the necessary database engine is installed and configured. 
+      Update the database connection string in the appsettings.json file if required.
+      * Start Microsoft SQL Server Management Studio.
+      * Server name must be "(localdb)\MSSQLLocalDB" and authentication must be Windows Authentication before connecting to server.
+      * Right click on 'Databases' section.
+      * Click on 'Attach'.
+      * Click 'Add' select the database file with .mdf extension from '~\{the-project}\Databases\'.
+      * Once the database has been attached click 'OK'.
+   5- To run the application, use dotnet run. The application will be accessible through the 
+      specified local host address (location url is http://localhost:5000).
+      * It is also possible to run the program by using 'dotnet watch' on terminal.
+      * After the operation is finished, press 'CTRL + C' to end the operation.
+
+ Section-8: Bug Reporting:
+   1- You may fix the bug if you are confident about the technologies listed on 'Technologies' section.
+   2- If not, reach out to Deniz K Acikbas through;
+      Email: dacikbas@umich.edu
+
+ Section-9: Recommended books for self-learning:
+   * Pro ASP.NET Core 6: Develop Cloud-Ready Web Applications Using MVC, Blazor, and Razor Pages 9th ed. Edition
+   * Starting out with Visual C# 5th Edition
+   * SQL for Beginners: An Informative and In-depth Guide to SQL Programming
+
+ Section-10: Contributors:
+  Deniz K. Acikbas, Kyle McCarthy, Samuel Stenerson, Parashar Parikh, Murad Tawfiq

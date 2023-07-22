@@ -1,0 +1,40 @@
+﻿@page "/UserAccount/ViewProfile/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: View Profile</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>@currentUser.Name @currentUser.Surname</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+    <MudText><MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Small" /> @currentUser.Email</MudText>
+    <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> $@currentUser.individualBalance left in your balance</MudText>
+    <MudText><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Size="Size.Small" /> The expense is $@currentUser.individualExpense</MudText>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdateUser" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Warning">EDIT PROFILE</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="CloseAccount" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NoAccounts" Color="Color.Error">CLOSE ACCOUNT</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    userAccount? currentUser = new userAccount();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(Id));
+    }
+
+    //Update user after pressing update button
+    protected async void UpdateUser()
+    {
+        _navigationManager.NavigateTo("/UserAccount/EditProfile/" + currentUser.Id);
+    }
+
+    //Close account after this button
+    protected async void CloseAccount()
+    {
+        _navigationManager.NavigateTo("/UserAccount/DeleteProfile/" + currentUser.Id);
+    }
+}

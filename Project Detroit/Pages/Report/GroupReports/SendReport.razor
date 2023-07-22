@@ -1,0 +1,76 @@
+﻿@page "/Reports/SendReports/Group/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject ReportService _ReportService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Send Report</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Send report to an individual</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@_report.ReportName" Clearable="true" Label="Report Name" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@_report.Details" Clearable="true" Label="Details" Lines="20" Margin="Margin.Dense" />
+        <MudCard Elevation="2" Class="mt-4 mb-4 pa-4">
+            <select class="form-control" @bind="selectedUserId">
+                @if (users == null)
+                {
+                    <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+                }
+                else
+                {
+                    <option value="">-- Select User --</option>
+                    @foreach (var user in users)
+                    {
+                        <option value="@user.Id">@user.Name @user.Surname</option>
+                    }
+                }
+            </select>
+        </MudCard>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="SendReportToUser" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Success">SEND REPORT</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    //Create a new report
+    Report _report = new Report()
+        {
+            Id = Guid.NewGuid()
+        };
+
+    //Section for user-related variables
+    List<userAccount> users;
+    Guid? selectedUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await _userAccountService.getAllUsersAsync();
+    }
+
+    //Send operation
+    protected async void SendReportToUser()
+    {
+        try
+        {
+            _report.UserAccountID = selectedUserId.Value;
+            await _ReportService.CreateReport(_report);
+            _navigationManager.NavigateTo($"/Reports/groupReports/{Id}");
+            Snackbar.Add("Operation successfully completed", Severity.Success);
+        }catch (Exception ex) {
+            Snackbar.Add("Incorrect information cannot be added. Please review what you have entered.", Severity.Error);
+        }
+    }
+
+    //Cancel operation
+    void Cancel()
+    {
+        _navigationManager.NavigateTo($"/Reports/groupReports/{Id}");
+    }
+}
+
+

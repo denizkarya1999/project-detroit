@@ -1,0 +1,47 @@
+﻿@page "/Payments/DeletePayment/Group/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject PaymentService _paymentService
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Delete Payment</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Delete Payment</strong></h1></MudText>
+    <MudText Class="mb-2">Are you sure you want to delete this payment?</MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText Class="mb-2"><h1><strong>@_payment.PaymentName</strong></h1></MudText>
+        <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has an amount of $@_payment.PaymentAmount</MudText>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="RemovePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    Payment? _payment = new Payment();
+    Group? currentGroup = new Group();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _payment = await _paymentService.GetPaymentById(Id);
+        currentGroup = await _groupService.getGroupByIdAsync(_payment.GroupID.Value);
+    }
+
+    // Delete payment after pressing the delete button
+    protected async void RemovePayment()
+    {
+        await _paymentService.DeletePayment(_payment.Id);
+        _navigationManager.NavigateTo($"/Payments/GroupPayments/{currentGroup.Id}");
+        Snackbar.Add("Payment deleted successfully", Severity.Success);
+    }
+
+    // Cancel operation
+    protected void Cancel()
+    {
+        _navigationManager.NavigateTo($"/Payments/GroupPayments/{currentGroup.Id}");
+    }
+}

@@ -1,0 +1,36 @@
+﻿@page "/Expenses/ViewExpense/Group/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject ExpenseService _expenseService
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: View Expense</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>@_expense.ExpenseName</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has an amount of $@_expense.ExpenseAmount</MudText>
+        </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="DeleteExpense" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE EXPENSE</MudButton>
+    </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    Expense? _expense = new Expense();
+    Group? _group = new Group();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _expense = await _expenseService.GetExpenseById(Id);
+        _group = await _groupService.getGroupByIdAsync(_expense.GroupID.Value);
+    }
+
+    // Redirect to delete group expense
+    protected void DeleteExpense()
+    {
+        _navigationManager.NavigateTo("/Expenses/DeleteExpense/Group/" + _expense.Id);
+    }
+}

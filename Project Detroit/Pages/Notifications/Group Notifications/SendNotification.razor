@@ -1,0 +1,84 @@
+﻿@page "/Notifications/SendNotification/Group/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService groupService
+@inject NotificationService notificationService
+@inject NavigationManager navigationManager
+@inject UserAccountService userAccountService
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Send Notification</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Send notifications to a user</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@_notification.NotificationName" Clearable="true" Label="Notification Name" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@_notification.Details" Clearable="true" Label="Details" Margin="Margin.Dense" />
+        <MudCard Elevation="2" Class="mt-4 mb-4 pa-4">
+            <select class="form-control" @bind="selectedUserId">
+                @if (users == null)
+                {
+                    <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+                }
+                else
+                {
+                    <option value="">-- Select User --</option>
+                    @foreach (var user in users)
+                    {
+                        <option value="@user.Id">@user.Name @user.Surname</option>
+                    }
+                }
+            </select>
+        </MudCard>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="SendNotificationToUser" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Send" Color="Color.Success">SEND NOTIFICATION</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    //Create a new notification
+    Notification? _notification = new Notification()
+        {
+            Id = Guid.NewGuid()
+        };
+
+    //Section for user-related variables
+    List<userAccount> users;
+    Guid? selectedUserId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await userAccountService.getAllUsersAsync();
+    }
+
+    //Send operation
+    protected async void SendNotificationToUser()
+    {
+        try
+        {
+            if (selectedUserId != null)
+            {
+                // Perform null check for selectedUserId before assigning it to _notification.UserId
+                _notification.UserAccountID = selectedUserId.Value;
+                await notificationService.CreateNotification(_notification);
+
+                // Navigate to the individualNotifications page to send the notification to the user
+                navigationManager.NavigateTo($"/Notifications/groupNotifications/{Id}");
+                Snackbar.Add("Operation successfully completed", Severity.Success);
+            } else
+            {
+                Snackbar.Add("Incorrect information cannot be added. Please review what you have entered.", Severity.Error);
+            }
+        } catch (Exception ex){
+            Snackbar.Add("Incorrect information cannot be added. Please review what you have entered.", Severity.Error);
+        }
+    }
+
+    //Cancel operation
+    void Cancel()
+    {
+        navigationManager.NavigateTo($"/Notifications/groupNotifications/{Id}");
+    }
+}

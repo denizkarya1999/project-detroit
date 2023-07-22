@@ -1,0 +1,49 @@
+﻿@page "/Members/MemberManager"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: Manage Members</PageTitle>
+
+<MudPaper Class="pa-8 ma-5" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>All Members</strong></h1></MudText>
+     @if (UserObj == null)
+        {
+        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+    }
+    else
+    {
+        <MudTable Items="@UserObj" Hover="true" SortLabel="Sort By" Dense="true" Class="pa-4 mt-3">
+            <HeaderContent>
+                <MudTh>Name</MudTh>
+                <MudTh>Surname</MudTh>
+                <MudTh>Email</MudTh>
+                <MudTh>Balance</MudTh>
+                <MudTh>Expense</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Surname">@context.Surname</MudTd>
+                <MudTd DataLabel="Email">@context.Email</MudTd>
+                <MudTd DataLabel="Balance">$@context.individualBalance</MudTd>
+                <MudTd DataLabel="Expense">$@context.individualExpense</MudTd>
+                <MudStack Class="py-16 d-flex flex-1" Row="true">
+                    <MudIconButton Href="@($"/Members/AddMember/{context.Id}")" Icon="@Icons.Filled.PersonAdd" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Members/RemoveMember/{context.Id}")" Icon="@Icons.Filled.PersonRemove" Color="Color.Error" />
+                </MudStack>
+            </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+@code {
+    List<userAccount> UserObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserObj = await Task.Run(() => _userAccountService.getAllUsersAsync());
+    }
+
+}

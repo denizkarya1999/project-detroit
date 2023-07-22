@@ -1,0 +1,45 @@
+﻿@page "/Groups/DeleteGroup/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Delete Group</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Delete Group</strong></h1></MudText>
+        <MudText Class="mb-2">Are you sure want to delete this group?</MudText>
+        <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText Class="mb-2"><h1><strong>@currentGroup.GroupName</strong></h1></MudText>
+        <MudCard Elevation="2" Class="mt-4 pa-4">
+            <MudText><MudIcon Icon="@Icons.Material.Filled.Group" Size="Size.Small" /> Has @currentGroup.Members.Count member(s)</MudText>
+            <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has balance of $@currentGroup.groupBalance</MudText>
+            <MudText><MudIcon Icon="@Icons.Material.Filled.AttachMoney" Size="Size.Small" /> Has expense of $@currentGroup.groupExpense</MudText>
+        </MudCard>
+        <MudButton Class="mt-4 mr-4" OnClick="RemoveGroup" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE</MudButton>
+        <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+            </MudCard>
+    </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    Group? currentGroup = new Group();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentGroup = await Task.Run(() => _groupService.getGroupByIdAsync(Id));
+    }
+
+    protected async void RemoveGroup()
+    {
+        await _groupService.DeleteGroupAsync(currentGroup);
+        _navigationManager.NavigateTo("/Group/ManageGroups");
+    }
+
+    void Cancel()
+    {
+        _navigationManager.NavigateTo("/Groups/ViewGroup/" + currentGroup.Id);
+    }
+}

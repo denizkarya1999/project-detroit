@@ -1,0 +1,44 @@
+﻿@page "/Reports/ViewReport/Individual/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject ReportService _reportService
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: View Report</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    @if (_report != null)
+    {
+        <MudText Class="mb-2"><h1><strong>@_report.ReportName</strong></h1></MudText>
+        <MudCard Elevation="2" Class="mt-4 pa-4">
+            <MudText>@_report.Details</MudText>
+        </MudCard>
+        <MudButton Class="mt-4 mr-4" OnClick="DeleteReport" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE REPORT</MudButton>
+    }
+    else
+    {
+        <MudText Typo="Typo.h5">Report not found.</MudText>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+
+    Report _report = new Report();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _report = await Task.Run(() => _reportService.GetReportById(Id));
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(_report.UserAccountID.Value));
+    }
+
+    //Redirect to delete report
+    protected async void DeleteReport()
+    {
+        _navigationManager.NavigateTo($"/Reports/DeleteReport/Individual/{_report.Id}");
+    }
+}

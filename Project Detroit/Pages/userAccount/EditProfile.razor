@@ -1,0 +1,66 @@
+﻿@page "/UserAccount/EditProfile/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Edit Profile</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Edit Profile</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@currentUser.Name" Clearable="true" Label="Name" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@currentUser.Surname" Clearable="true" Label="Surname" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@currentUser.Email" Clearable="true" Label="Email" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@currentUser.Password" Label="Password" Variant="Variant.Text" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" AdornmentAriaLabel="Show Password" OnAdornmentClick="ShowPassword" />
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@currentUser.individualBalance" Format="N2" Label="Individual Balance" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@currentUser.individualExpense" Format="N2" Label="Individual Expense" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="UpdateUser" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Success">SAVE CHANGES</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    userAccount? currentUser = new userAccount();
+
+    bool isShow;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(Id));
+    }
+
+    void ShowPassword()
+    {
+        @if (isShow)
+        {
+            isShow = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            isShow = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
+        }
+    }
+
+    //Update user after pressing update button
+    protected async void UpdateUser()
+    {
+        await _userAccountService.UpdateUserAsync(currentUser);
+        _navigationManager.NavigateTo("/UserAccount/ViewProfile/" + currentUser.Id);
+        Snackbar.Add("Operation successfully completed", Severity.Success);
+    }
+
+    //Trigger action when clicking cancel button
+    void Cancel()
+    {
+        _navigationManager.NavigateTo("/UserAccount/ViewProfile/" + currentUser.Id);
+    }
+}

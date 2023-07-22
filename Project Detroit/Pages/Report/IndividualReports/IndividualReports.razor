@@ -1,0 +1,55 @@
+﻿@page "/Reports/individualReports/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject ReportService _ReportService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: Individual Reports</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1>Your Reports</h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <div style="width:600px">
+            <MudFab Color="Color.Error" Icon="@Icons.Material.Filled.Send" OnClick="SendReport" />
+        </div>
+    </MudCard>
+    @if (ReportObj == null)
+    {
+        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+    }else
+    {
+        <MudTable Items="@ReportObj" Hover="true" SortLabel="Sort By" Dense="true" Class="pa-4 mt-3">
+                 <HeaderContent>
+                     <MudTh>Report Name</MudTh>
+                    <MudTh>Actions</MudTh>
+                     </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Notification Name">@context.ReportName</MudTd>
+                <MudStack Class="py-16 d-flex flex-1" Row="true">
+                    <MudIconButton Href="@($"/Reports/ViewReport/Individual/{context.Id}")" Icon="@Icons.Filled.Preview" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Reports/DeleteReport/Individual/{context.Id}")" Icon="@Icons.Filled.Delete" Color="Color.Error" />
+                </MudStack>
+                 </RowTemplate>
+            </MudTable>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+    List<Report> ReportObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(Id));
+        ReportObj = await Task.Run(() => _ReportService.GetReportsByUserId(Id));
+    }
+
+    //Trigger action when clicking send button
+    void SendReport()
+    {
+        _navigationManager.NavigateTo($"/Reports/SendReports/Individual/{Id}");
+    }
+}

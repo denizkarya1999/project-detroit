@@ -1,0 +1,51 @@
+﻿@page "/Payments/AddPayment/Group/{UID:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject PaymentService _paymentService
+@inject GroupService _groupService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Add Payment</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Add Payment</strong></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudTextField @bind-Value="@_payment.PaymentName" Clearable="true" Label="Payment Name" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@_payment.PaymentAmount" Clearable="true" Label="Payment Amount ($)" Margin="Margin.Dense" />
+    </MudCard>
+    <MudButton Class="mt-4 mr-4" OnClick="CreatePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Success">ADD PAYMENT</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+</MudPaper>
+
+@code {
+    [Parameter] public Guid UID { get; set; }
+
+    // Create a new payment
+    Payment _payment = new Payment()
+        {
+            Id = Guid.NewGuid()
+        };
+
+    // Create Payment
+    protected async Task CreatePayment()
+    {
+        _payment.GroupID = UID;
+
+        if (await _paymentService.CreatePayment(_payment))
+        {
+            Snackbar.Add("Payment successfully added.", Severity.Success);
+            _navigationManager.NavigateTo($"Payments/groupPayments/{UID}");
+        }
+        else
+        {
+            Snackbar.Add("Failed to add payment.", Severity.Error);
+        }
+    }
+
+    // Cancel operation
+    void Cancel()
+    {
+        _navigationManager.NavigateTo($"Payments/groupPayments/{UID}");
+    }
+}

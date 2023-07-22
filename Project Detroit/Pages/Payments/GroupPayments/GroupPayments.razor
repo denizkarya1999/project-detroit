@@ -1,0 +1,59 @@
+﻿@page "/Payments/groupPayments/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject GroupService _groupService
+@inject PaymentService _PaymentService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: Group Payments</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1>@currentGroup.GroupName has a balance of <b>$@currentGroup.groupBalance</b></h1></MudText>
+    <MudCard Elevation="2" Class="mt-4 pa-4">
+        <div style="width:600px">
+            <MudFab Color="Color.Error" Icon="@Icons.Material.Filled.Add" OnClick="AddPayment" />
+        </div>
+    </MudCard>
+    @if (PaymentObj == null)
+    {
+        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+    }
+    else
+    {
+        <MudTable Items="@PaymentObj" Hover="true" SortLabel="Sort By" Dense="true" Class="pa-4 mt-3">
+            <HeaderContent>
+                <MudTh>Payment Name</MudTh>
+                <MudTh>Payment Amount</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Payment Name">@context.PaymentName</MudTd>
+                <MudTd DataLabel="Payment Amount">$@context.PaymentAmount</MudTd>
+                <MudStack Class="py-16 d-flex flex-1" Row="true">
+                    <MudIconButton Href="@($"/Payments/ViewPayment/Group/{context.Id}")" Icon="@Icons.Filled.Preview" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Payments/EditPayment/Group/{context.Id}")" Icon="@Icons.Filled.Edit" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Payments/DeletePayment/Group/{context.Id}")" Icon="@Icons.Filled.Delete" Color="Color.Error" />
+                </MudStack>
+            </RowTemplate>
+        </MudTable>
+    }
+</MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    Group? currentGroup = new Group();
+    List<Payment> PaymentObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentGroup = await Task.Run(() => _groupService.getGroupByIdAsync(Id));
+        PaymentObj = await Task.Run(() => _PaymentService.GetPaymentsBasedOnGroupId(Id));
+    }
+
+    //Trigger action when clicking add button
+    void AddPayment()
+    {
+        _navigationManager.NavigateTo($"/Payments/AddPayment/Group/{Id}");
+    }
+}

@@ -1,0 +1,50 @@
+﻿@page "/Payments/DeletePayment/Individual/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject PaymentService _PaymentService
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Delete Payment</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+     <MudText Class="mb-2"><h1><strong>Delete Payment</strong></h1></MudText>
+        <MudText Class="mb-2">Are you sure want to delete this payment?</MudText>
+        <MudCard Elevation="2" Class="mt-4 pa-4">
+        <MudText Class="mb-2"><h1><strong>@_payment.PaymentName</strong></h1></MudText>
+        <MudCard Elevation="2" Class="mt-4 pa-4">
+            <MudText><MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Small" /> Has an amount of $@_payment.PaymentAmount</MudText>
+            </MudCard>
+        <MudButton Class="mt-4 mr-4" OnClick="RemovePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error">DELETE</MudButton>
+        <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
+            </MudCard>
+    </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+
+    Payment _payment = new Payment();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _payment = await Task.Run(() => _PaymentService.GetPaymentById(Id));
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(_payment.UserAccountID.Value));
+    }
+
+    //Delete Payment
+    protected async void RemovePayment()
+    {
+        await _PaymentService.DeletePayment(_payment.Id);
+        _navigationManager.NavigateTo($"/Payments/individualPayments/{currentUser.Id}");
+        Snackbar.Add("Operation successfully completed", Severity.Success);
+    }
+
+    //Cancel operation
+    void Cancel()
+    {
+        _navigationManager.NavigateTo($"/Payments/individualPayments/{currentUser.Id}");
+    }
+}

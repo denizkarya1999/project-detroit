@@ -1,0 +1,58 @@
+﻿@page "/Expenses/individualExpenses/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject ExpenseService _ExpenseService
+@inject NavigationManager _navigationManager
+
+<PageTitle>Project Detroit: Individual Expenses</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+     <MudText Class="mb-2"><h1>Your current balance is <b>$@currentUser.individualBalance</b></h1></MudText>
+     <MudCard Elevation="2" Class="mt-4 pa-4">
+         <div style="width:600px">
+        <MudFab Color="Color.Error" Icon="@Icons.Material.Filled.Add" OnClick="AddExpense"/>
+    </div>
+    </MudCard>
+        @if (ExpenseObj == null)
+        {
+        <MudProgressLinear Color="Color.Error" Indeterminate="true" Class="my-7" />
+    }
+    else
+    {
+        <MudTable Items="@ExpenseObj" Hover="true" SortLabel="Sort By" Dense="true" Class="pa-4 mt-3">
+            <HeaderContent>
+                <MudTh>Expense Name</MudTh>
+                <MudTh>Expense Amount</MudTh>
+                <MudTh>Actions</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Expense Name">@context.ExpenseName</MudTd>
+                <MudTd DataLabel="Expense Amount">$@context.ExpenseAmount</MudTd>
+                <MudStack Class="py-16 d-flex flex-1" Row="true">
+                    <MudIconButton Href="@($"/Expenses/ViewExpense/Individual/{context.Id}")" Icon="@Icons.Filled.Preview" Color="Color.Error" />
+                    <MudIconButton Href="@($"/Expenses/DeleteExpense/Individual/{context.Id}")" Icon="@Icons.Filled.Delete" Color="Color.Error" />
+                    </MudStack>
+            </RowTemplate>
+        </MudTable>
+    }
+ </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+
+    userAccount? currentUser = new userAccount();
+    List<Expense> ExpenseObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(Id));
+        ExpenseObj = await Task.Run(() => _ExpenseService.GetExpensesByUserId(Id));
+    }
+
+    //Trigger action when clicking add button
+    void AddExpense()
+    {
+        _navigationManager.NavigateTo($"/Expenses/AddExpense/Individual/{Id}");
+    }
+}

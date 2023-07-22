@@ -1,0 +1,36 @@
+﻿@page "/UserAccount/DeleteProfile/{Id:guid}"
+@using Project.Detroit.Models
+@using Project.Detroit.Services
+@inject UserAccountService _userAccountService
+@inject NavigationManager _navigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Project Detroit: Close Account</PageTitle>
+
+<MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
+    <MudText Class="mb-2"><h1><strong>Close Account</strong></h1></MudText>
+    <MudText Class="mb-2">Are you sure you no longer want to use Project Detroit?</MudText>
+    <MudButton Class="mt-4 mr-4" OnClick="RemoveUser" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NoAccounts" Color="Color.Error">YES, CLOSE MY ACCOUNT</MudButton>
+    <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Balance" Color="Color.Default">NO, I MADE A MISTAKE</MudButton>
+    </MudPaper>
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    userAccount? currentUser = new userAccount();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await Task.Run(() => _userAccountService.getUserByIdAsync(Id));
+    }
+
+    protected async void RemoveUser()
+    {
+        await _userAccountService.DeleteUserAsync(currentUser);
+        _navigationManager.NavigateTo("/");
+    }
+
+    void Cancel()
+    {
+        _navigationManager.NavigateTo("/UserAccount/ViewProfile/" + currentUser.Id);
+    }
+}

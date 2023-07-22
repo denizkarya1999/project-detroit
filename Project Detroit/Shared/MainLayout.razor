@@ -1,0 +1,135 @@
+﻿@using Project.Detroit.Models
+@using Project.Detroit.Dialogs
+@using Project.Detroit.Services
+@using System.Text.Json
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@inherits LayoutComponentBase
+@inject NavigationManager _navigationManager
+@inject UserAccountService _userAccountService
+@inject IDialogService DialogService
+@inject IJSRuntime JSRuntime
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="0" Style="@($"background:{Colors.Red.Accent4};")">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Style="@($"color:{Colors.Grey.Lighten5};")" Edge="Edge.Start" OnClick="@DrawerToggle" />
+        <MudText Typo="Typo.h6">Project Detroit</MudText>
+        <MudSpacer />
+        <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit">
+            <MudMenuItem @onclick="EditProfile">
+                View Profile
+            </MudMenuItem>
+            <MudMenuItem @onclick="SignOut">
+                Sign Out
+            </MudMenuItem>
+        </MudMenu>
+        <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit">
+            <MudMenuItem @onclick="InfoDialog">
+                About Project Detroit
+            </MudMenuItem>
+        </MudMenu>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
+        <MudDrawerHeader>
+            @if (isInitialized)
+            {
+                @if (currentUser != null)
+                {
+                    <MudText Typo="Typo.h6">@currentUser.Name @currentUser.Surname</MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">Loading...</MudText>
+                }
+            }
+        </MudDrawerHeader>
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = true;
+    private Guid UserId { get; set; }
+    userAccount? currentUser;
+    private bool isInitialized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = new Uri(_navigationManager.Uri);
+        var queryParams = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        var userIdString = queryParams["userId"];
+
+        if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out var userId))
+        {
+            UserId = userId;
+        }
+
+        isInitialized = true;
+        await InitializeAsync();
+    }
+
+    private async Task InitializeAsync()
+    {
+        // Attempt to load currentUser from local storage
+        currentUser = await GetItemFromLocalStorage<userAccount>("currentUser");
+
+        if (currentUser == null)
+        {
+            // Fetch user from the server if not found in local storage
+            currentUser = await _userAccountService.getUserByIdAsync(UserId);
+
+            // Store currentUser in local storage for future use
+            await SetItemInLocalStorage("currentUser", currentUser);
+
+            // Trigger a re-render to show the updated UI
+            StateHasChanged();
+        }
+    }
+
+    private async Task SetItemInLocalStorage<T>(string key, T value)
+    {
+        await JSRuntime.InvokeVoidAsync("localStorage.setItem", key, JsonSerializer.Serialize(value));
+    }
+
+    private async Task<T> GetItemFromLocalStorage<T>(string key)
+    {
+        var data = await JSRuntime.InvokeAsync<string>("localStorage.getItem", key);
+        return string.IsNullOrEmpty(data) ? default : JsonSerializer.Deserialize<T>(data);
+    }
+
+    private async Task RemoveItemFromLocalStorage(string key)
+    {
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", key);
+    }
+
+    private void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private void InfoDialog()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<AboutDialog>("About Project Detroit", options);
+    }
+
+    private void EditProfile()
+    {
+        _navigationManager.NavigateTo($"/UserAccount/ViewProfile/{UserId}");
+    }
+
+    private async Task SignOut()
+    {
+        // Clear currentUser from local storage on sign out
+        await RemoveItemFromLocalStorage("currentUser");
+        _navigationManager.NavigateTo("/");
+    }
+}
