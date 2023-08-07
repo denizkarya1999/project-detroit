@@ -6,13 +6,13 @@
 @inject NavigationManager _navigationManager
 @inject ISnackbar Snackbar
 
-<PageTitle>Project Detroit: Add Payment</PageTitle>
+<PageTitle>Split Smart: Add Payment</PageTitle>
 
 <MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
     <MudText Class="mb-2"><h1><strong>Add Payment</strong></h1></MudText>
     <MudCard Elevation="2" Class="mt-4 pa-4">
         <MudTextField @bind-Value="@_payment.PaymentName" Clearable="true" Label="Payment Name" Margin="Margin.Dense" />
-        <MudTextField @bind-Value="@_payment.PaymentAmount" Clearable="true" Label="Payment Amount ($)" Margin="Margin.Dense" />
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@_payment.PaymentAmount" Format="N2" Label="Expense Amount ($)" T="decimal?" Min="0" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
     </MudCard>
     <MudButton Class="mt-4 mr-4" OnClick="CreatePayment" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Success">ADD PAYMENT</MudButton>
     <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>

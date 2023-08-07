@@ -6,7 +6,7 @@
 @inject IDialogService DialogService
 @inject UserAccountService _userAccountService
 
-<PageTitle>Project Detroit: Welcome</PageTitle>
+<PageTitle>Split Smart: Welcome</PageTitle>
 
 <MudContainer Class="mt-4 mb-4">
     <MudGrid>
@@ -15,17 +15,17 @@
     </MudItem>
         <MudItem xs="12">
             <MudStack Class="welcome-content">
-                <MudText Typo="Typo.h2" Class="mb-4">Welcome to Project Detroit</MudText>
+                <MudText Typo="Typo.h2" Class="mb-4">Welcome to Split Smart</MudText>
                 <MudText Typo="Typo.body1" Class="mb-3">
                     An amazing application for managing expenses and reports in groups.
                 </MudText>
                 <MudText Typo="Typo.body1" Class="mb-3">
                     Are you tired of the hassle of managing expenses and reports in your groups? Look no further!
-                    Project Detroit is here to simplify your group management tasks and make collaboration
+                    Split Smart is here to simplify your group management tasks and make collaboration
                     effortless.
                 </MudText>
                 <MudText Typo="Typo.body1" Class="mb-3">
-                    With Project Detroit, you can create and manage groups, track expenses, send and view reports,
+                    With Split Smart, you can create and manage groups, track expenses, send and view reports,
                     and much more. Say goodbye to the stress of managing finances within your groups and focus on
                     what matters most – building strong connections and achieving your goals together.
                 </MudText>
@@ -41,14 +41,14 @@
     <MudDivider Class="mt-5 mb-5" />
     <MudGrid>
         <MudItem xs="12">
-            <MudText Typo="Typo.h4" Class="mb-4">Key Features of Project Detroit</MudText>
+            <MudText Typo="Typo.h4" Class="mb-4">Key Features of Split Smart</MudText>
         </MudItem>
         <MudItem xs="12" sm="6" md="4">
             <MudStack Class="feature-card text-center">
                 <MudIcon Icon="@Icons.Material.Filled.Groups" Size="Size.Large" Class="mb-3" />
                 <MudText Typo="Typo.h6" Class="mb-3">Create and Manage Groups</MudText>
                 <MudText Typo="Typo.body1">
-                    Project Detroit allows you to create and manage groups effortlessly. Whether it's for
+                    Split Smart allows you to create and manage groups effortlessly. Whether it's for
                     your family, friends, or a team project, you can set up a group and invite members with
                     just a few clicks.
                 </MudText>
@@ -59,7 +59,7 @@
                 <MudIcon Icon="@Icons.Material.Filled.Money" Size="Size.Large" Class="mb-3" />
                 <MudText Typo="Typo.h6" Class="mb-3">Track Expenses</MudText>
                 <MudText Typo="Typo.body1">
-                    Keep track of your group's expenses easily with Project Detroit. You can add and manage
+                    Keep track of your group's expenses easily with Split Smart. You can add and manage
                     expenses, assign them to specific members, and view detailed expense reports in real-time.
                 </MudText>
             </MudStack>
@@ -69,7 +69,7 @@
                 <MudIcon Icon="@Icons.Material.Filled.Payments" Size="Size.Large" Class="mb-3" />
                 <MudText Typo="Typo.h6" Class="mb-3">Make Payments</MudText>
                 <MudText Typo="Typo.body1">
-                    Simplify group payments with Project Detroit. You can easily split expenses, track pending
+                    Simplify group payments with Split Smart. You can easily split expenses, track pending
                     payments, and make quick transactions to settle debts within the group.
                 </MudText>
             </MudStack>
@@ -79,7 +79,7 @@
                 <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Large" Class="mb-3" />
                 <MudText Typo="Typo.h6" Class="mb-3">Manage Group Members</MudText>
                 <MudText Typo="Typo.body1">
-                    Invite and manage group members seamlessly with Project Detroit. You can easily add or remove
+                    Invite and manage group members seamlessly with Split Smart. You can easily add or remove
                     members, assign roles, and keep everyone updated on group activities.
                 </MudText>
             </MudStack>
@@ -89,7 +89,7 @@
                 <MudIcon Icon="@Icons.Material.Filled.Notifications" Size="Size.Large" Class="mb-3" />
                 <MudText Typo="Typo.h6" Class="mb-3">Receive Notifications</MudText>
                 <MudText Typo="Typo.body1">
-                    Stay informed with Project Detroit's notification system. You'll receive updates on group
+                    Stay informed with Split Smart's notification system. You'll receive updates on group
                     activities, pending payments, and important events to keep everyone on the same page.
                 </MudText>
             </MudStack>
@@ -119,6 +119,6 @@
     private void InfoDialog()
     {
         var options = new DialogOptions { CloseOnEscapeKey = true };
-        DialogService.Show<AboutDialog>("About Project Detroit", options);
+        DialogService.Show<AboutDialog>("About Split Smart", options);
     }
 }

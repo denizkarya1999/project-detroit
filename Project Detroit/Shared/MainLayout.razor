@@ -16,7 +16,7 @@
 <MudLayout>
     <MudAppBar Elevation="0" Style="@($"background:{Colors.Red.Accent4};")">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Style="@($"color:{Colors.Grey.Lighten5};")" Edge="Edge.Start" OnClick="@DrawerToggle" />
-        <MudText Typo="Typo.h6">Project Detroit</MudText>
+        <MudText Typo="Typo.h6">Split Smart</MudText>
         <MudSpacer />
         <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit">
             <MudMenuItem @onclick="EditProfile">
@@ -28,7 +28,7 @@
         </MudMenu>
         <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit">
             <MudMenuItem @onclick="InfoDialog">
-                About Project Detroit
+                About Split Smart
             </MudMenuItem>
         </MudMenu>
     </MudAppBar>
@@ -118,7 +118,7 @@
     private void InfoDialog()
     {
         var options = new DialogOptions { CloseOnEscapeKey = true };
-        DialogService.Show<AboutDialog>("About Project Detroit", options);
+        DialogService.Show<AboutDialog>("About Split Smart", options);
     }
 
     private void EditProfile()

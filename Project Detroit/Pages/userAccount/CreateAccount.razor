@@ -6,22 +6,36 @@
 @inject NavigationManager _navigationManager
 @inject ISnackbar Snackbar
 
-<PageTitle>Project Detroit: Create Account</PageTitle>
+<PageTitle>Split Smart: Create Account</PageTitle>
+<MudSnackbarProvider />
 
 <MudPaper Class="pa-8 ma-5 mt-2" Elevation="3">
     <MudText Class="mb-2"><h1><strong>Create A New Account</strong></h1></MudText>
     <MudCard Elevation="2" Class="mt-4 pa-4">
-        <MudTextField @bind-Value="@newUser.Name" Clearable="true" Label="Name" Margin="Margin.Dense" />
-        <MudTextField @bind-Value="@newUser.Surname" Clearable="true" Label="Surname" Margin="Margin.Dense" />
-        <MudTextField @bind-Value="@newUser.Email" Clearable="true" Label="Email" Margin="Margin.Dense" />
-        <MudTextField @bind-Value="@newUser.Password" Label="Password" Variant="Variant.Text" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" AdornmentAriaLabel="Show Password" OnAdornmentClick="ShowPassword" />
-        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@newUser.individualBalance" Format="N2" Label="Individual Balance" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
-        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@newUser.individualExpense" Format="N2" Label="Individual Expense" T="decimal?" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        <MudTextField @bind-Value="@newUser.Name" Clearable="true" Label="Firstname *" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@newUser.Surname" Clearable="true" Label="Last name *" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@newUser.Email" Clearable="true" Label="Email *" Margin="Margin.Dense" />
+        <MudTextField @bind-Value="@newUser.Password" Label="Password *" Variant="Variant.Text" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" AdornmentAriaLabel="Show Password" OnAdornmentClick="ShowPassword" />
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@newUser.individualBalance" Format="N2" Label="Individual Balance" T="decimal?" Min="0" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        <MudNumericField Class="mt-4" Immediate="false" @bind-Value="@newUser.individualExpense" Format="N2" Label="Individual Expense" T="decimal?" Min="0" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.AttachMoney" AdornmentColor="Color.Warning"></MudNumericField>
+        <MudText Class="mb-2" Style="color: red; font-size: 10px;"><sup>*</sup> Indicates required fields</MudText>
     </MudCard>
         <MudButton Class="mt-4 mr-4" OnClick="CreateUser" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Success">Create Account</MudButton>
         <MudButton Class="mt-4 mr-4" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Cancel" Color="Color.Default">CANCEL</MudButton>
     </MudPaper>
+
+
 @code {
+
+    // Used in case the same email is used
+    private void ClearNewUser()
+    {
+        newUser = new userAccount()
+            {
+                Id = Guid.NewGuid()
+            };
+    }
+
     //Create a new user account
     userAccount newUser = new userAccount()
         {
@@ -51,24 +65,28 @@
     //Create user
     private async Task CreateUser()
     {
-        try
+        // Check if all the required fields are filled
+        if (!string.IsNullOrWhiteSpace(newUser.Name) || !string.IsNullOrWhiteSpace(newUser.Surname) ||
+            !string.IsNullOrWhiteSpace(newUser.Email) || !string.IsNullOrWhiteSpace(newUser.Password))
         {
-            if (newUser != null)
+            var temp = await _userAccountService.getUserByEmailAsync(newUser.Email);
+            // Check if the email is already in use
+            if (temp != null)
             {
-                // Add the user to the database
-                await _userAccountService.addUserAsync(newUser);
-
-                // Redirect to the login page after creating the user
-                _navigationManager.NavigateTo("/");
+                Snackbar.Add("The email is already in use!!", Severity.Error);
+                newUser = new userAccount()
+                    {
+                        Id = Guid.NewGuid()
+                    };
             }
             else
             {
-                // User is null, handle the error
-                Snackbar.Add("The username cannot be created at this time.", Severity.Error);
-                _navigationManager.NavigateTo("/UserAccount/CreateAccount");
+                Snackbar.Add("Account created succesfully", Severity.Success);
+                // Redirect to the login page after creating the user
+                _navigationManager.NavigateTo("/");
             }
         }
-        catch (Exception ex)
+        else
         {
             Snackbar.Add("The username cannot be created at this time.", Severity.Error);
             _navigationManager.NavigateTo("/UserAccount/CreateAccount");

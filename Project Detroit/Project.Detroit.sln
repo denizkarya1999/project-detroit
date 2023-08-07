@@ -4,6 +4,8 @@ VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Detroit", "Project.Detroit.csproj", "{1E616BD8-112F-4983-ACD4-6D3FE3D2850C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Detroit.Tests", "..\Project.Detroit.Tests\Project.Detroit.Tests.csproj", "{D3D627AC-948B-4171-904A-11D0BA4CA7B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{1E616BD8-112F-4983-ACD4-6D3FE3D2850C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E616BD8-112F-4983-ACD4-6D3FE3D2850C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E616BD8-112F-4983-ACD4-6D3FE3D2850C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3D627AC-948B-4171-904A-11D0BA4CA7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3D627AC-948B-4171-904A-11D0BA4CA7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3D627AC-948B-4171-904A-11D0BA4CA7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3D627AC-948B-4171-904A-11D0BA4CA7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
