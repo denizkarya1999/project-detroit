@@ -9,241 +9,241 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Project.Detroit
 build_property.RootNamespace = Project.Detroit
-build_property.ProjectDir = C:\Users\deniz\source\split-smart\Project Detroit\
+build_property.ProjectDir = C:\Users\deniz\OneDrive\Documents\GitHub\project-detroit\Project Detroit\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\deniz\source\split-smart\Project Detroit
+build_property.MSBuildProjectDirectory = C:\Users\deniz\OneDrive\Documents\GitHub\project-detroit\Project Detroit
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/App.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Dialogs/AboutDialog.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Dialogs/AboutDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = RGlhbG9nc1xBYm91dERpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/CreateUserLayout.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/CreateUserLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlVXNlckxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/GroupExpenses/AddExpense.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/GroupExpenses/AddExpense.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxHcm91cEV4cGVuc2VzXEFkZEV4cGVuc2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/GroupExpenses/DeleteExpense.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/GroupExpenses/DeleteExpense.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxHcm91cEV4cGVuc2VzXERlbGV0ZUV4cGVuc2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/GroupExpenses/GroupExpenses.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/GroupExpenses/GroupExpenses.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxHcm91cEV4cGVuc2VzXEdyb3VwRXhwZW5zZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/GroupExpenses/SelectGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/GroupExpenses/SelectGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxHcm91cEV4cGVuc2VzXFNlbGVjdEdyb3VwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/GroupExpenses/ViewExpense.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/GroupExpenses/ViewExpense.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxHcm91cEV4cGVuc2VzXFZpZXdFeHBlbnNlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/IndividualExpenses/AddExpense.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/IndividualExpenses/AddExpense.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxJbmRpdmlkdWFsRXhwZW5zZXNcQWRkRXhwZW5zZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/IndividualExpenses/DeleteExpense.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/IndividualExpenses/DeleteExpense.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxJbmRpdmlkdWFsRXhwZW5zZXNcRGVsZXRlRXhwZW5zZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/IndividualExpenses/IndividualExpenses.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/IndividualExpenses/IndividualExpenses.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxJbmRpdmlkdWFsRXhwZW5zZXNcSW5kaXZpZHVhbEV4cGVuc2VzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Expense/IndividualExpenses/ViewExpense.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Expense/IndividualExpenses/ViewExpense.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXhwZW5zZVxJbmRpdmlkdWFsRXhwZW5zZXNcVmlld0V4cGVuc2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/CreateGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/CreateGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcQ3JlYXRlR3JvdXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/DeleteGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/DeleteGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcRGVsZXRlR3JvdXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/EditGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/EditGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcRWRpdEdyb3VwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/ManageGroups.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/ManageGroups.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcTWFuYWdlR3JvdXBzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/Members/AddMember.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/Members/AddMember.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcTWVtYmVyc1xBZGRNZW1iZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/Members/MemberManager.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/Members/MemberManager.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcTWVtYmVyc1xNZW1iZXJNYW5hZ2VyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/Members/RemoveMember.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/Members/RemoveMember.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcTWVtYmVyc1xSZW1vdmVNZW1iZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Group/ViewGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Group/ViewGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR3JvdXBcVmlld0dyb3VwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Index.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Notifications/Group Notifications/GroupNotifications.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Notifications/Group Notifications/GroupNotifications.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90aWZpY2F0aW9uc1xHcm91cCBOb3RpZmljYXRpb25zXEdyb3VwTm90aWZpY2F0aW9ucy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Notifications/Group Notifications/SelectGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Notifications/Group Notifications/SelectGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90aWZpY2F0aW9uc1xHcm91cCBOb3RpZmljYXRpb25zXFNlbGVjdEdyb3VwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Notifications/Group Notifications/SendNotification.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Notifications/Group Notifications/SendNotification.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90aWZpY2F0aW9uc1xHcm91cCBOb3RpZmljYXRpb25zXFNlbmROb3RpZmljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Notifications/Individual Notifications/IndividualNotifications.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Notifications/Individual Notifications/IndividualNotifications.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90aWZpY2F0aW9uc1xJbmRpdmlkdWFsIE5vdGlmaWNhdGlvbnNcSW5kaXZpZHVhbE5vdGlmaWNhdGlvbnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Notifications/Individual Notifications/SendNotification.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Notifications/Individual Notifications/SendNotification.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm90aWZpY2F0aW9uc1xJbmRpdmlkdWFsIE5vdGlmaWNhdGlvbnNcU2VuZE5vdGlmaWNhdGlvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/GroupPayments/AddPayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/GroupPayments/AddPayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcR3JvdXBQYXltZW50c1xBZGRQYXltZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/GroupPayments/DeletePayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/GroupPayments/DeletePayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcR3JvdXBQYXltZW50c1xEZWxldGVQYXltZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/GroupPayments/EditPayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/GroupPayments/EditPayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcR3JvdXBQYXltZW50c1xFZGl0UGF5bWVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/GroupPayments/GroupPayments.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/GroupPayments/GroupPayments.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcR3JvdXBQYXltZW50c1xHcm91cFBheW1lbnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/GroupPayments/SelectGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/GroupPayments/SelectGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcR3JvdXBQYXltZW50c1xTZWxlY3RHcm91cC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/GroupPayments/ViewPayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/GroupPayments/ViewPayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcR3JvdXBQYXltZW50c1xWaWV3UGF5bWVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/IndividualPayments/AddPayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/IndividualPayments/AddPayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcSW5kaXZpZHVhbFBheW1lbnRzXEFkZFBheW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/IndividualPayments/DeletePayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/IndividualPayments/DeletePayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcSW5kaXZpZHVhbFBheW1lbnRzXERlbGV0ZVBheW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/IndividualPayments/EditPayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/IndividualPayments/EditPayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcSW5kaXZpZHVhbFBheW1lbnRzXEVkaXRQYXltZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/IndividualPayments/IndividualPayments.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/IndividualPayments/IndividualPayments.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcSW5kaXZpZHVhbFBheW1lbnRzXEluZGl2aWR1YWxQYXltZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Payments/IndividualPayments/ViewPayment.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Payments/IndividualPayments/ViewPayment.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudHNcSW5kaXZpZHVhbFBheW1lbnRzXFZpZXdQYXltZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/GroupReports/DeleteReport.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/GroupReports/DeleteReport.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEdyb3VwUmVwb3J0c1xEZWxldGVSZXBvcnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/GroupReports/GroupReports.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/GroupReports/GroupReports.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEdyb3VwUmVwb3J0c1xHcm91cFJlcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/GroupReports/SelectGroup.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/GroupReports/SelectGroup.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEdyb3VwUmVwb3J0c1xTZWxlY3RHcm91cC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/GroupReports/SendReport.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/GroupReports/SendReport.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEdyb3VwUmVwb3J0c1xTZW5kUmVwb3J0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/GroupReports/ViewReport.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/GroupReports/ViewReport.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEdyb3VwUmVwb3J0c1xWaWV3UmVwb3J0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/IndividualReports/DeleteReport.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/IndividualReports/DeleteReport.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEluZGl2aWR1YWxSZXBvcnRzXERlbGV0ZVJlcG9ydC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/IndividualReports/IndividualReports.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/IndividualReports/IndividualReports.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEluZGl2aWR1YWxSZXBvcnRzXEluZGl2aWR1YWxSZXBvcnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/IndividualReports/SendReport.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/IndividualReports/SendReport.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEluZGl2aWR1YWxSZXBvcnRzXFNlbmRSZXBvcnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Report/IndividualReports/ViewReport.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Report/IndividualReports/ViewReport.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0XEluZGl2aWR1YWxSZXBvcnRzXFZpZXdSZXBvcnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/userAccount/CloseAccount.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/userAccount/CloseAccount.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdXNlckFjY291bnRcQ2xvc2VBY2NvdW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/userAccount/CreateAccount.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/userAccount/CreateAccount.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdXNlckFjY291bnRcQ3JlYXRlQWNjb3VudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/userAccount/EditProfile.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/userAccount/EditProfile.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdXNlckFjY291bnRcRWRpdFByb2ZpbGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/userAccount/Login.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/userAccount/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdXNlckFjY291bnRcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/userAccount/ViewProfile.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/userAccount/ViewProfile.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdXNlckFjY291bnRcVmlld1Byb2ZpbGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Shared/LoginLayout.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Shared/LoginLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXExvZ2luTGF5b3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Shared/MainLayout.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Shared/NavMenu.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/_Imports.razor]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/Error.cshtml]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/_Host.cshtml]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/deniz/source/split-smart/Project Detroit/Pages/_Layout.cshtml]
+[C:/Users/deniz/OneDrive/Documents/GitHub/project-detroit/Project Detroit/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
