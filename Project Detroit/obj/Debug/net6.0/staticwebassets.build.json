@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HONQUes4k6mYWfwZ28RJMhPpglzVVEd8SRAds6QSgy8=",
+  "Hash": "YzFgWen2RyFY4HxAz7dP78Lrws4Tcc8OimABexpr7Mc=",
   "Source": "Project.Detroit",
   "BasePath": "_content/Project.Detroit",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "Project.Detroit\\wwwroot",
       "Source": "Project.Detroit",
-      "ContentRoot": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\",
       "BasePath": "_content/Project.Detroit",
       "Pattern": "**"
     }
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "C:\\Users\\deniz\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\headManager.js"
     },
     {
-      "Identity": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\favicon.ico",
       "SourceId": "Project.Detroit",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\",
       "BasePath": "_content/Project.Detroit",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\images\\money.JPG",
+      "Identity": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\images\\money.JPG",
       "SourceId": "Project.Detroit",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\",
       "BasePath": "_content/Project.Detroit",
       "RelativePath": "images/money.JPG",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\images\\money.JPG"
     },
     {
-      "Identity": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\localStorageFunctions.js",
+      "Identity": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\localStorageFunctions.js",
       "SourceId": "Project.Detroit",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\",
       "BasePath": "_content/Project.Detroit",
       "RelativePath": "localStorageFunctions.js",
       "AssetKind": "All",

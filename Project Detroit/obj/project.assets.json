@@ -2428,11 +2428,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\Project.Detroit.csproj",
+      "projectUniqueName": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\Project.Detroit.csproj",
       "projectName": "Project.Detroit",
-      "projectPath": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\Project.Detroit.csproj",
+      "projectPath": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\Project.Detroit.csproj",
       "packagesPath": "C:\\Users\\deniz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\obj\\",
+      "outputPath": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

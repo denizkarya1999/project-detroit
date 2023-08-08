@@ -1,15 +1,15 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\images\\money.JPG",
+      "Id": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\images\\money.JPG",
       "PackagePath": "staticwebassets\\images\\money.JPG"
     },
     {
-      "Id": "C:\\Users\\deniz\\source\\Temp\\split-smart\\Project Detroit\\wwwroot\\localStorageFunctions.js",
+      "Id": "C:\\Users\\deniz\\source\\split-smart\\Project Detroit\\wwwroot\\localStorageFunctions.js",
       "PackagePath": "staticwebassets\\localStorageFunctions.js"
     },
     {
